@@ -8,16 +8,18 @@ $num = 5 * 4;
 $num /= 2;  var_dump($num);
 
 // Q3 日付操作
-$day = date('Y年m月d日');   var_dump($day);
-$today = date('H時i分s秒');    var_dump($today);
-echo '現在時刻は、' . $day . $today . 'です';
+$currentDateTime = date('Y年m月d日 H時i分s秒');
+echo '現在時刻は、' . $currentDateTime . 'です。';
 
 
 // Q4 条件分岐-1 if文
 $device = 'windows';
-if($device == 'windows'){echo '使用OSは、windowsです。';}
-if($device == 'mac'){echo '使用OSは、macです。';}
-if($device != 'windows' &&  $device != 'mac'){
+
+if ($device === 'windows') {
+    echo '使用OSは、windowsです。';
+} elseif ($device === 'mac') {
+    echo '使用OSは、macです。';
+} else {
     echo 'どちらでもありません。';
 }
 
@@ -55,14 +57,27 @@ foreach ($kantou as $ken => $kentyo) {
 
 
 // Q9 連想配列-3
-$kantou['北海道'] = ['札幌'];
-$kantou['沖縄'] = ['那覇'];var_dump($kantou);
+$kanto_list = ['東京都', '神奈川県', '千葉県', '埼玉県', '栃木県', '群馬県', '茨城県'];
 
-foreach ($kantou as $ken => $kentyo){
-if($ken === '北海道'|| $ken === '沖縄'){
-    echo $ken . 'は関東地方ではありません。';
-}else{echo $ken . 'の県庁所在地は' . $kentyo . 'です。';
-}}
+$kantou = [
+    '東京都' => '新宿区',
+    '神奈川県' => '横浜市',
+    '千葉県' => '千葉市',
+    '埼玉県' => 'さいたま市',
+    '栃木県' => '宇都宮市',
+    '群馬県' => '前橋市',
+    '茨城県' => '水戸市'];
+    
+    $kantou['北海道'] = '札幌市';
+$kantou['沖縄'] = '那覇市';
+
+foreach ($kantou as $ken => $kentyo) {
+    if (!in_array($ken, $kanto_list)) {
+        echo $ken . 'は関東地方ではありません。';
+    } else {
+        echo $ken . 'の県庁所在地は、' . $kentyo . 'です。';
+    }
+}
 
 
 // Q10 関数-1
@@ -88,8 +103,12 @@ echo $price . 'の商品の税込価格は' . $taxprice . 'です。';
 
 // Q12 関数とif文
 function distinguishNum ($num){
-    if ($num % 2 === 0){return $num . 'は偶数です。';
-}if($num % 2 === 1){return $num . 'は奇数です。';}}
+    if ($num % 2 === 0){
+        return $num . 'は偶数です。';
+}else{
+    return $num . 'は奇数です。';
+    
+}}
 
 $bangou1 = distinguishNum(11);
 $bangou2 = distinguishNum(24);
@@ -109,7 +128,7 @@ function evaluateGrade($garde){
         return '合格ですが、追加課題があります。';
     case 'D':
         return '不合格です。';
-        default :
+    default :
         return '判定不明です。講師に問い合わせください。';
 }}
 
@@ -117,7 +136,7 @@ $garde1 = evaluateGrade('A');
 $garde2 = evaluateGrade('E');
 
 var_dump($garde1);  
-var_dump($garde2);
+var_dump($garde2);   
 
 
 
